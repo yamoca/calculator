@@ -11,30 +11,27 @@ function addToDisplay(event) {
     textArea.textContent = displayValue;
 }
 
-function operate(operation, a, b) {
+function add(a, b) { return a + b }
 
-}
+function subtract(a, b) { return a - b}
 
-function add(a, b) {
+function multiply(a, b) { return a * b }
 
-}
+function divide(a, b) { return a / b }
 
-function subtract(a, b) {
-
-}
-
-function multiply(a, b) {
-    return a * b; 
-}
-
-function divide(a, b) {
-
-}
+const operations = {
+    '+': add,
+    '-': subtract,
+    '*': multiply,
+    '/': divide
+};
 
 function calculate() {
-    if (textArea.textContent.includes("*")) {
-        let vals = textArea.textContent.split("*");
-        displayValue = multiply(vals[0], vals[1]);
-        textArea.textContent = displayValue; 
+    for (const operator in operations) {
+        if (textArea.textContent.includes(operator)) {
+            let vals = textArea.textContent.split(operator);
+            displayValue = operations[operator](Number(vals[0]), Number(vals[1]));
+            textArea.textContent = displayValue; 
+        }
     }
 }
