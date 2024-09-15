@@ -1,5 +1,7 @@
 const textArea = document.querySelector("p");
 let displayValue = ""
+console.log(-2*4);
+
 
 function clearDisplay() {
     displayValue = "";
@@ -26,11 +28,15 @@ const operations = {
     '/': divide
 };
 
+// doesnt work with neg numbers cause this function splits it at the first "-" so -3*5 is split into ["", "3*5"]
+// possible work around dont use negative as a normal function (e.g 2+-3) so yeah 
+
 function calculate() {
     for (const operator in operations) {
         if (textArea.textContent.includes(operator)) {
             let vals = textArea.textContent.split(operator);
-            displayValue = operations[operator](Number(vals[0]), Number(vals[1]));
+            console.log(vals);
+            displayValue = operations[operator](parseInt(vals[0], 10), parseInt(vals[1]), 10);
             textArea.textContent = displayValue; 
         }
     }
